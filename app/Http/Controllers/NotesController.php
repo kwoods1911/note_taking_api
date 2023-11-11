@@ -20,7 +20,7 @@ class NotesController extends Controller
     public function index()
     {
         // dd(NotesResource::collection(Notes::all()), Notes::all());
-        return NotesResource::collection(Notes::all());
+        return NotesResource::collection(auth()->user()->notes()->get());
     }
 
     /**
@@ -39,9 +39,10 @@ class NotesController extends Controller
      */
     public function store(StoreNotesRequest $request, Notes $notes)
     {
-        // $note = new Notes();
+        $note = new Notes();
         $notes->note_title = $request->note_title;
         $notes->note_body = $request->note_body;
+        $notes->user_id = auth()->user()->id;
         $notes->save();
         
     }
@@ -51,10 +52,10 @@ class NotesController extends Controller
      */
     public function show(Notes $notes, $id)
     {
-        
         $note = $notes::where('id',$id)->firstOrFail();
+        $this->authorize('view', $note);
         return NotesResource::make($note);
-        
+
     }
 
     /**

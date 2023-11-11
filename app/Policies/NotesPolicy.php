@@ -21,7 +21,8 @@ class NotesPolicy
      */
     public function view(User $user, Notes $notes): bool
     {
-        //
+        
+        return $user->id === $notes->user_id;
     }
 
     /**
@@ -31,16 +32,13 @@ class NotesPolicy
     {
         return true;
     }
-    public function store(User $user): bool
-    {
-        return true;
-    }
+
     /**
      * Determine whether the user can update the model.
      */
     public function update(User $user, Notes $notes): bool
     {
-        return true;
+        //
     }
 
     /**

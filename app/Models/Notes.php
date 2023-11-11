@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notes extends Model
 {
+    use HasFactory;
     protected $table = 'notes';
     protected $connection = 'mysql';
-    protected $fillable = ['note_title', 'note_body'];
-    use HasFactory;
+    protected $fillable = ['note_title', 'note_body', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+   
 }
