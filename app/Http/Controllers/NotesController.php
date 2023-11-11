@@ -83,6 +83,7 @@ class NotesController extends Controller
     public function destroy(DeleteNotesRequest $request, Notes $notes,$id)
     {
         $note = Notes::find($id);
+        $this->authorize('delete',$note);
         $note->delete();
         return response()->noContent();
     }

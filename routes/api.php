@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// Route::apiResource('/notes',NotesController::class);
+
 
 Route::controller(NotesController::class)->middleware('auth:sanctum')->group(function () {
     Route::get('/notes', 'index');
@@ -28,6 +28,4 @@ Route::controller(NotesController::class)->middleware('auth:sanctum')->group(fun
     Route::post('/notes', 'store');
     Route::put('/notes/{id}','update');
     Route::delete('/notes/{id}', 'destroy');
-
-    // Route::apiResource('/notes',NotesController::class);
 });
