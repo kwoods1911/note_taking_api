@@ -38,7 +38,7 @@ class NotesPolicy
      */
     public function update(User $user, Notes $notes): bool
     {
-        //
+        return $user->id === $notes->user_id;
     }
 
     /**

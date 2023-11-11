@@ -19,7 +19,6 @@ class NotesController extends Controller
      */
     public function index()
     {
-        // dd(NotesResource::collection(Notes::all()), Notes::all());
         return NotesResource::collection(auth()->user()->notes()->get());
     }
 
@@ -44,7 +43,6 @@ class NotesController extends Controller
         $notes->note_body = $request->note_body;
         $notes->user_id = auth()->user()->id;
         $notes->save();
-        
     }
 
     /**
@@ -72,6 +70,7 @@ class NotesController extends Controller
     public function update(UpdateNotesRequest $request, Notes $notes, $id)
     {
         $note = Notes::find($id);
+        $this->authorize('update',$note);
         $note->note_title = $request->note_title;
         $note->note_body = $request->note_body;
         $note->save();
